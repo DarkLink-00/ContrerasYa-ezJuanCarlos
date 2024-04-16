@@ -29,21 +29,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                        <a class="nav-link active px-lg-4" aria-current="page" href="#">Inicio</a>
-                        <a class="nav-link px-lg-4" href="#">Cursos</a>
-                        <a class="nav-link px-lg-4" href="#">Sobre Mi</a>
-                        <a class="nav-link px-lg-4" href="#">Contactame</a>
-                    </div>
+                    <a class="nav-link active px-lg-4" aria-current="page" href="#inicio">Inicio</a>
+                    <a class="nav-link px-lg-4" href="#cursos">Cursos</a>
+                    <a class="nav-link px-lg-4" href="#about">Sobre Mi</a>
+                    <a class="nav-link px-lg-4" href="#contact">Contactame</a>
+                </div>
             </div>
         </div>
     </nav>
-    <section class="main py-5">
+    <section class="main py-5" id="inicio">
         <div class="container py-5">
             <div class="row py-5">
                 <div class="col-lg-6 py-5 mr-auto">
                     <h3 class="bg-white">Buscas asesoria sobre <br> como mejorar tu negocio <br> y estado financiero, <br> te tengo una excelente solución.</h3>
-                    <button type="button" class="btn primary mt-5 bg-white">Cursos</button>
-                    <button type="button" class="btn primary mt-5 bg-white">Sobre mi</button>
+                    <button type="button" class="btn primary mt-5 bg-white" onclick="window.location.href='#cursos'">Cursos</button>
+                    <button type="button" class="btn primary mt-5 bg-white" onclick="window.location.href='#about'">Sobre mi</button>
                 </div>
                 <div class="col-lg-6">
                     <img src="images/11667289_20945987.svg" alt="">
@@ -51,7 +51,7 @@
             </div>
         </div>
     </section>
-    <section class="cursos">
+    <section class="cursos" id="cursos">
         <div class="container">
             <h1 class="text-center pb-5">Cursos</h1>
             <div class="row pb-4">
@@ -88,7 +88,7 @@
             </div>
         </div>
     </section>
-    <section class="about py-5">
+    <section class="about py-5" id="about">
         <div class="container py-5">
             <div class="row py-5">
                 <div class="col-lg-6 text-center">
@@ -100,7 +100,7 @@
             </div>
         </div>
     </section>
-    <section class="contact">
+    <section class="contact" id="contact">
         <div class="container justfy-content-center">
             <div class="card col-lg-6 p-3">
                 <form id="form" action="" class="form">
@@ -109,11 +109,11 @@
                     </div>
                     <div class="mb-2">
                         <label for="name">Nombre</label> 
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Ej. Charles Fuentes">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Ej. Charles Fuentes" required>
                     </div>   
                     <div class="mb-3">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" name="correo" id="correo" placeholder="example@asd.com">
+                        <input type="email" class="form-control" name="correo" id="correo" placeholder="example@asd.com" required>
                     </div> 
                     <div class="mb-3">
                         <label for="message">Mensaje</label>
@@ -135,6 +135,12 @@
 
         function handleSubmit(event){
             event.preventDefault()
+            const email = this.querySelector('#correo').value.trim()
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            if (!emailPattern.test(email)){
+                alert("Ingrese un correo valido")
+                return
+            }
             const form = new FormData(this)
             $buttonMailto.setAttribute('href',`mailto:me@carloscy.ti20@utsjr.edu.mx?subject=nombre ${form.get('name')}  correo ${form.get('correo')}&body=${form.get('message')}`)
             $buttonMailto.click()            
